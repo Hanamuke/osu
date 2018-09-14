@@ -19,7 +19,7 @@ namespace osu.Game.Rulesets.Catch.Replays
         public CatchAutoGenerator(Beatmap<CatchHitObject> beatmap)
             : base(beatmap)
         {
-            Replay = new Replay { User = new User { Username = @"Autoplay" } };
+            Replay = new Replay { User = new User { Username = @"osu!salad!" } };
         }
 
         protected Replay Replay;
@@ -45,10 +45,9 @@ namespace osu.Game.Rulesets.Catch.Replays
 
                 bool dashRequired = speedRequired > movement_speed && h.StartTime != 0;
 
-                // todo: get correct catcher size, based on difficulty CS.
-                const float catcher_width_half = CatcherArea.CATCHER_SIZE / CatchPlayfield.BASE_WIDTH * 0.3f * 0.5f;
+                float halfCatcherWidth = CatcherArea.GetCatcherSize(Beatmap.BeatmapInfo.BaseDifficulty) / 2;
 
-                if (lastPosition - catcher_width_half < h.X && lastPosition + catcher_width_half > h.X)
+                if (lastPosition - halfCatcherWidth < h.X && lastPosition + halfCatcherWidth > h.X)
                 {
                     //we are already in the correct range.
                     lastTime = h.StartTime;
